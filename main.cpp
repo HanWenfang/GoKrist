@@ -13,10 +13,10 @@ int main(int argc, char const *argv[])
 	string input;
 	Engine engine;
 
+	engine.run(input);
+	
 	for(;;)
 	{
-		engine.run(input);
-
 		FD_ZERO(&set);
 		FD_SET(0, &set);
 		tv.tv_sec = 1;
@@ -28,9 +28,6 @@ int main(int argc, char const *argv[])
 			engine.run(input);
 		}
 	}
-
-
-
 
 
 	return 0;

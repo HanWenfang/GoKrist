@@ -3,11 +3,8 @@
 #define KRIST_H
 
 /*  
-    *   *
-	*****
-	 * *
-	 * *
-
+    *  *
+	****
 */
 class Krist
 {

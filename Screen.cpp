@@ -15,7 +15,6 @@ void Screen::init()
 void Screen::refresh()
 {
 	init();
-	out();
 }
 
 void Screen::out()
@@ -31,7 +30,7 @@ void Screen::out()
 	cout << endl;
 }
 
-void Screen::updateKrist(Krist krist)
+void Screen::updateKrist(Krist const &krist)
 {
 	/*
 		j ==> y
@@ -43,31 +42,87 @@ void Screen::updateKrist(Krist krist)
 		{
 			if ( i==krist.left_upper_x && j==krist.left_upper_y ) {
 				pixes[j][i] = '*';
-			} else if ( i==krist.left_upper_x+4 && j==krist.left_upper_y ) {
+			} else if ( i==krist.left_upper_x+3 && j==krist.left_upper_y ) {
 				pixes[j][i] = '*';
 			} else if(i==krist.left_upper_x && j==krist.left_upper_y + 1) {
 				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+1 && j==krist.left_upper_y) {
+			} else if(i==krist.left_upper_x+1 && j==krist.left_upper_y+1) {
 				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+2 && j==krist.left_upper_y) {
+			} else if(i==krist.left_upper_x+2 && j==krist.left_upper_y+1) {
 				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+3 && j==krist.left_upper_y) {
-				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+4 && j==krist.left_upper_y) {
-				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+1 && j==krist.left_upper_y+2) {
-				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+3 && j==krist.left_upper_y+2) {
-				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+1 && j==krist.left_upper_y+3) {
-				pixes[j][i] = '*';
-			} else if(i==krist.left_upper_x+3 && j==krist.left_upper_y+3) {
+			} else if(i==krist.left_upper_x+3 && j==krist.left_upper_y+1) {
 				pixes[j][i] = '*';
 			} 
 		}
-		cout << endl;
 	}
-	cout << endl;
+}
+
+void Screen::updateBackground(Background &background)
+{
+	/*
+		j ==> y
+		i ==> x
+	*/
+	updateTree(background.tree1);
+	updateTree(background.tree2);
+	updateTree(background.tree3);
+}
+
+void Screen::updateTree(Tree &tree)
+{
+	/*
+		j ==> y
+		i ==> x
+	*/
+	for(unsigned int j=0; j<20; ++j)
+	{
+		for(unsigned int i=0; i<100; ++i)
+		{
+			if ( i==tree.left_upper_x && j==tree.left_upper_y ) {
+				pixes[j][i] = '*';
+			} else if ( i==tree.left_upper_x+3 && j==tree.left_upper_y ) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x && j==tree.left_upper_y + 1) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+1 && j==tree.left_upper_y+1) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+2 && j==tree.left_upper_y+1) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+3 && j==tree.left_upper_y+1) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+1 && j==tree.left_upper_y+2) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+2 && j==tree.left_upper_y+2) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+1 && j==tree.left_upper_y+3) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+2 && j==tree.left_upper_y+3) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+1 && j==tree.left_upper_y+4) {
+				pixes[j][i] = '*';
+			} else if(i==tree.left_upper_x+2 && j==tree.left_upper_y+4) {
+				pixes[j][i] = '*';
+			} 
+		}
+	}
+}
+
+void Screen::backgroundScrollBack(Background &background, int step)
+{
+	/*
+		optimize: just move the tree ?!
+	*/
+	scrollBackTree(background.tree1, step);
+	scrollBackTree(background.tree2, step);
+	scrollBackTree(background.tree3, step);
+}
+
+void Screen::scrollBackTree(Tree &tree, int step)
+{
+	tree.left_upper_x -= step;
+
+	tree.left_upper_x += 100; // scroll
+	tree.left_upper_x %= 100; // scroll
 }
 
 
